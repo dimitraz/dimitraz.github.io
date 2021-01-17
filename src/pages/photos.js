@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
@@ -45,9 +46,12 @@ const Photos = ({ data, location }) => {
       <List>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
+          const thumbnail = post.frontmatter.thumbnail
 
           return (
             <ListItem key={post.fields.slug}>
+              {thumbnail && <Img fluid={thumbnail.childImageSharp.fluid} />}
+
               <Header>
                 <Heading>
                   <Link to={post.fields.slug} itemProp="url">
@@ -56,6 +60,7 @@ const Photos = ({ data, location }) => {
                 </Heading>
                 <small>{post.frontmatter.date}</small>
               </Header>
+
               <Container
                 dangerouslySetInnerHTML={{
                   __html: post.frontmatter.description || post.excerpt,
@@ -92,6 +97,13 @@ export const pageQuery = graphql`
           date(formatString: "MMMM DD, YYYY")
           title
           description
+          thumbnail {
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
       }
     }
