@@ -1,10 +1,11 @@
 import React from "react"
-import { Link } from "gatsby"
+import Navigation from "./navigation"
 import styled from "styled-components"
 
 const Wrapper = styled.section`
-  padding: 4em;
+  padding: 6em;
   display: flex;
+  justify-content: flex-start;
 
   mobile {
     flex-wrap: wrap;
@@ -13,45 +14,17 @@ const Wrapper = styled.section`
 `
 
 const Header = styled.header`
-  flex: 0 0 30%;
+  flex: 0 0 25%;
 `
-
-const Heading = styled.h1`
-  padding: 0;
-  margin: 0;
-  color: tomato;
-`
-
 const Container = styled.section`
   flex: 1 1 auto;
 `
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`
 
-const ListItem = styled.li``
-
-const ListLink = props => (
-  <ListItem>
-    <Link to={props.to}>{props.children}</Link>
-  </ListItem>
-)
-
-const Layout = ({ title, children }) => {
+const Layout = ({ location, children }) => {
   return (
     <Wrapper>
       <Header>
-        <Heading>
-          <Link to="/">{title}</Link>
-        </Heading>
-
-        <List>
-          <ListLink to="/">Home</ListLink>
-          <ListLink to="/blog/">Blog</ListLink>
-          <ListLink to="/photos/">Photos</ListLink>
-        </List>
+        <Navigation location={location} />
       </Header>
 
       <Container>{children}</Container>

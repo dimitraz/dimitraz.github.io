@@ -16,8 +16,7 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  color: blue;
-  padding: 0;
+  padding: 0 0 2em 0;
   margin: 0;
 `
 

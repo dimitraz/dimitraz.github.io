@@ -5,7 +5,9 @@ import SEO from "../components/seo"
 import styled from "styled-components"
 
 const Container = styled.section``
-const Header = styled.header``
+const Header = styled.header`
+  margin-bottom: 2em;
+`
 const Navigation = styled.nav``
 const Heading = styled.h1`
   padding: 0;

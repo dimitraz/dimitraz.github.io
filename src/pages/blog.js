@@ -16,8 +16,7 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  color: blue;
-  padding: 0;
+  padding: 0 0 2em 0;
   margin: 0;
 `
 
@@ -25,6 +24,10 @@ const Header = styled.section``
 const Heading = styled.h1`
   padding: 0;
   margin: 0;
+`
+
+const Thumbnail = styled(Img)`
+  margin: 2em 0;
 `
 
 const Blog = ({ data, location }) => {
@@ -51,8 +54,6 @@ const Blog = ({ data, location }) => {
 
           return (
             <ListItem key={post.fields.slug}>
-              {thumbnail && <Img fluid={thumbnail.childImageSharp.fluid} />}
-
               <Header>
                 <Heading>
                   <Link to={post.fields.slug} itemProp="url">
@@ -61,6 +62,10 @@ const Blog = ({ data, location }) => {
                 </Heading>
                 <small>{post.frontmatter.date}</small>
               </Header>
+
+              {thumbnail && (
+                <Thumbnail fluid={thumbnail.childImageSharp.fluid} />
+              )}
 
               <Container
                 dangerouslySetInnerHTML={{
