@@ -11,7 +11,6 @@ const Home = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
-      <Bio />
       Hello world!
     </Layout>
   )

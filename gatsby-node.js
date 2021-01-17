@@ -20,6 +20,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             fields {
               slug
             }
+            frontmatter {
+              title
+              type
+            }
           }
         }
       }
@@ -34,16 +38,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
+  // Create photo post pages
+  const photos = result.data.allMarkdownRemark.nodes.filter(
+    post => post.frontmatter.type === "photo"
+  )
+  if (photos.length > 0) {
+    photos.forEach((post, index) => {
+      const previousPostId = index === 0 ? null : photos[index - 1].id
+      const nextPostId =
+        index === photos.length - 1 ? null : photos[index + 1].id
 
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
+      createPage({
+        path: post.fields.slug,
+        component: blogPost,
+        context: {
+          id: post.id,
+          previousPostId,
+          nextPostId,
+        },
+      })
+    })
+  }
 
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+  // Create blog post pages
+  const blogs = result.data.allMarkdownRemark.nodes.filter(
+    post => post.frontmatter.type === "blog"
+  )
+  if (blogs.length > 0) {
+    blogs.forEach((post, index) => {
+      const previousPostId = index === 0 ? null : blogs[index - 1].id
+      const nextPostId = index === blogs.length - 1 ? null : blogs[index + 1].id
 
       createPage({
         path: post.fields.slug,
@@ -62,12 +86,14 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const slug = createFilePath({ node, getNode })
+    const value =
+      node.frontmatter.type === "blog" ? `/blog${slug}` : `/photos${slug}`
 
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: value,
     })
   }
 }
@@ -106,6 +132,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       description: String
       date: Date @dateformat
+      type: String
     }
 
     type Fields {
