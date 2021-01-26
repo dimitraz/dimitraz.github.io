@@ -13,6 +13,7 @@ const Container = styled.section`
 const List = styled.ul`
   list-style: none;
   margin: 0;
+  padding: 0;
 `
 
 const ListItem = styled.li`
@@ -20,10 +21,29 @@ const ListItem = styled.li`
   margin: 0;
 `
 
-const Header = styled.section``
+const ListItemLink = styled(Link)`
+  text-decoration: none;
+`
+
+const Header = styled.section`
+  display: grid;
+  grid-template-columns: 10% 75%;
+  align-items: center;
+`
+
 const Heading = styled.h1`
   padding: 0;
   margin: 0;
+`
+
+const Date = styled.small`
+  font-family: monospace;
+`
+
+const Content = styled.section`
+  width: 75%;
+  margin-left: 10%;
+  margin-top: 0.5em;
 `
 
 const Photos = ({ data, location }) => {
@@ -49,23 +69,18 @@ const Photos = ({ data, location }) => {
 
           return (
             <ListItem key={post.fields.slug}>
-              {thumbnail && <Img fluid={thumbnail.childImageSharp.fluid} />}
-
               <Header>
+                <Date>{post.frontmatter.date}</Date>
                 <Heading>
-                  <Link to={post.fields.slug} itemProp="url">
+                  <ListItemLink to={post.fields.slug} itemProp="url">
                     {title}
-                  </Link>
+                  </ListItemLink>
                 </Heading>
-                <small>{post.frontmatter.date}</small>
               </Header>
 
-              <Container
-                dangerouslySetInnerHTML={{
-                  __html: post.frontmatter.description || post.excerpt,
-                }}
-                itemProp="description"
-              />
+              <Content>
+                {thumbnail && <Img fluid={thumbnail.childImageSharp.fluid} />}
+              </Content>
             </ListItem>
           )
         })}
@@ -93,7 +108,7 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "DD MMMM YYYY")
           title
           description
           thumbnail {

@@ -4,7 +4,15 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
 
-const Container = styled.section``
+const Container = styled.section`
+  width: 75%;
+  margin-left: 10%;
+`
+
+const Content = styled.section`
+  line-height: 1.5;
+`
+
 const Header = styled.header`
   margin-bottom: 2em;
 `
@@ -12,6 +20,10 @@ const Navigation = styled.nav``
 const Heading = styled.h1`
   padding: 0;
   margin: 0;
+`
+
+const Date = styled.small`
+  font-family: monospace;
 `
 
 const BlogPostTemplate = ({ data, location }) => {
@@ -26,25 +38,27 @@ const BlogPostTemplate = ({ data, location }) => {
         description={post.frontmatter.description || post.excerpt}
       />
 
-      <Header>
-        <Heading itemProp="headline">{post.frontmatter.title}</Heading>
-        {post.frontmatter.date}
-      </Header>
+      <Container>
+        <Header>
+          <Heading itemProp="headline">{post.frontmatter.title}</Heading>
+          <Date>{post.frontmatter.date}</Date>
+        </Header>
 
-      <Container dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Content dangerouslySetInnerHTML={{ __html: post.html }} />
 
-      <Navigation>
-        {previous && (
-          <Link to={previous.fields.slug} rel="prev">
-            ← {previous.frontmatter.title}
-          </Link>
-        )}
-        {next && (
-          <Link to={next.fields.slug} rel="next">
-            {next.frontmatter.title} →
-          </Link>
-        )}
-      </Navigation>
+        <Navigation>
+          {previous && (
+            <Link to={previous.fields.slug} rel="prev">
+              ← {previous.frontmatter.title}
+            </Link>
+          )}
+          {next && (
+            <Link to={next.fields.slug} rel="next">
+              {next.frontmatter.title} →
+            </Link>
+          )}
+        </Navigation>
+      </Container>
     </Layout>
   )
 }

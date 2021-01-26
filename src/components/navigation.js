@@ -23,6 +23,7 @@ const NavLink = styled(Link)`
 
 const NavLinkText = styled.span`
   border: 1px dotted;
+  font-family: monospace;
   background: ${props => (props.isActive ? "lightblue" : "none")};
 `
 
@@ -48,9 +49,17 @@ const Navigation = ({ location }) => {
           }
         }
       }
+      catIcon: file(absolutePath: { regex: "/cat.png/" }) {
+        childImageSharp {
+          fixed(width: 65, height: 70, quality: 95) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
     }
   `)
   const icon = data?.folderIcon?.childImageSharp?.fixed
+  const catIcon = data?.catIcon?.childImageSharp?.fixed
 
   return (
     <Nav>
@@ -60,7 +69,7 @@ const Navigation = ({ location }) => {
       <NavItem to="/blog" location={location} icon={icon}>
         Blog
       </NavItem>
-      <NavItem to="/photos" location={location} icon={icon}>
+      <NavItem to="/photos" location={location} icon={catIcon}>
         Photos
       </NavItem>
     </Nav>
