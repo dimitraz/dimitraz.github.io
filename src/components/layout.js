@@ -3,6 +3,7 @@ import Navigation from "./navigation"
 import styled from "styled-components"
 import { createGlobalStyle } from "styled-components"
 import Graphik from "../fonts/Graphik-Regular.otf"
+import { useContext } from "./store/storeHelpers"
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -14,21 +15,16 @@ const GlobalStyle = createGlobalStyle`
     line-height: 3em;
     }
 
-  body {
-    font-family: 'Graphik', 'Lab Mono';
-    color: #222;
-    // background-image: url(https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
-    // https://content.instructables.com/ORIG/FRM/4UUR/GJQE90QG/FRM4UURGJQE90QG.jpg?auto=webp&frame=1&width=320&md=e96c6b78022477eddbeb29d432180372
-    // https://i.pinimg.com/736x/2b/97/e4/2b97e4a225d6372fa9c2e473e909854c.jpg
-    background-image: ${props =>
-      props.location.pathname === "/"
-        ? "url(https://content.instructables.com/ORIG/FRM/4UUR/GJQE90QG/FRM4UURGJQE90QG.jpg?auto=webp&frame=1&width=320&md=e96c6b78022477eddbeb29d432180372)"
-        : ""};
-    background-size: cover;
+  body, h1, a, a:active, a:visited {
+    color: ${props => (props.theme ? "#eee" : "#222")};
   }
 
-  a:visited {
-    color: #222;
+  body {
+    font-family: 'IBM Plex Mono', 'Lab Mono';
+    background-repeat: repeat;
+    background-size: 350px;
+    background-image: url(${props =>
+      props.background ? `${props.background}` : ""});
   }
 `
 
@@ -51,20 +47,17 @@ const Wrapper = styled.section`
   }
 `
 
-const Header = styled.header`
-  flex: 0 0 15%;
-`
-const Container = styled.section`
-  flex: 0 0 70%;
-`
+const Header = styled.header``
+const Container = styled.section``
 
 const Layout = ({ location, children }) => {
-  console.log(location)
+  const { background, theme } = useContext()
+
   return (
     <React.Fragment>
-      <GlobalStyle theme="purple" location={location} />
+      <GlobalStyle location={location} theme={theme} background={background} />
 
-      <Navbar>Hello</Navbar>
+      <Navbar>Start here</Navbar>
 
       <Wrapper>
         <Header>

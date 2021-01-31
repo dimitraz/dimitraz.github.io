@@ -23,7 +23,6 @@ const ListItem = styled.li`
 
 const ListItemLink = styled(Link)`
   text-decoration: none;
-  color: #222;
 `
 
 const Header = styled.section`

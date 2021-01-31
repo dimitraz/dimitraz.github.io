@@ -4,6 +4,7 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
+import { useContext } from "../components/store/storeHelpers"
 
 const Container = styled.section`
   padding: 0;
@@ -23,7 +24,6 @@ const ListItem = styled.li`
 
 const ListItemLink = styled(Link)`
   text-decoration: none;
-  color: #222;
 `
 
 const Header = styled.section`
@@ -42,13 +42,10 @@ const Date = styled.small`
   font-family: monospace;
 `
 
-const Thumbnail = styled(Img)`
-  margin: 2em 0;
-`
-
 const Photos = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
+  const { updateTheme } = useContext()
 
   if (posts.length === 0) {
     return (
@@ -72,15 +69,19 @@ const Photos = ({ data, location }) => {
               <Header>
                 <Date>{post.frontmatter.date}</Date>
                 <Heading>
-                  <ListItemLink to={post.fields.slug} itemProp="url">
+                  <ListItemLink
+                    to={post.fields.slug}
+                    itemProp="url"
+                    onMouseLeave={() => updateTheme()}
+                    onClick={() => updateTheme()}
+                    onMouseEnter={() =>
+                      updateTheme(thumbnail.publicURL, "white")
+                    }
+                  >
                     {title}
                   </ListItemLink>
                 </Heading>
               </Header>
-
-              {thumbnail && (
-                <Thumbnail fluid={thumbnail.childImageSharp.fluid} />
-              )}
             </ListItem>
           )
         })}
@@ -112,11 +113,7 @@ export const pageQuery = graphql`
           title
           description
           thumbnail {
-            childImageSharp {
-              fluid(maxWidth: 800) {
-                ...GatsbyImageSharpFluid
-              }
-            }
+            publicURL
           }
         }
       }
