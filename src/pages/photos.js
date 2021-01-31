@@ -17,12 +17,13 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  padding: 0 0 2em 0;
+  padding: 0 0 4em 0;
   margin: 0;
 `
 
 const ListItemLink = styled(Link)`
   text-decoration: none;
+  color: #222;
 `
 
 const Header = styled.section`
@@ -34,16 +35,15 @@ const Header = styled.section`
 const Heading = styled.h1`
   padding: 0;
   margin: 0;
+  font-family: Graphik;
 `
 
 const Date = styled.small`
   font-family: monospace;
 `
 
-const Content = styled.section`
-  width: 75%;
-  margin-left: 10%;
-  margin-top: 0.5em;
+const Thumbnail = styled(Img)`
+  margin: 2em 0;
 `
 
 const Photos = ({ data, location }) => {
@@ -78,9 +78,9 @@ const Photos = ({ data, location }) => {
                 </Heading>
               </Header>
 
-              <Content>
-                {thumbnail && <Img fluid={thumbnail.childImageSharp.fluid} />}
-              </Content>
+              {thumbnail && (
+                <Thumbnail fluid={thumbnail.childImageSharp.fluid} />
+              )}
             </ListItem>
           )
         })}
@@ -108,7 +108,7 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "DD MMMM YYYY")
+          date(formatString: "DD MMM YYYY")
           title
           description
           thumbnail {

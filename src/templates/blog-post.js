@@ -7,19 +7,30 @@ import styled from "styled-components"
 const Container = styled.section`
   width: 75%;
   margin-left: 10%;
+
+  span {
+    max-width: 100% !important;
+    margin-bottom: 1em;
+  }
 `
 
 const Content = styled.section`
   line-height: 1.5;
+  font-family: Graphik;
 `
 
 const Header = styled.header`
   margin-bottom: 2em;
 `
-const Navigation = styled.nav``
+
+const Navigation = styled.nav`
+  margin-top: 3em;
+`
+
 const Heading = styled.h1`
   padding: 0;
   margin: 0;
+  font-family: Graphik;
 `
 
 const Date = styled.small`
