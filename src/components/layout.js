@@ -1,9 +1,15 @@
 import React from "react"
 import Navigation from "./navigation"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { createGlobalStyle } from "styled-components"
 import Graphik from "../fonts/Graphik-Regular.otf"
 import { useContext } from "./store/storeHelpers"
+
+export const SansSerifStack = css`
+  font-family: "Graphik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+`
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -57,7 +63,7 @@ const Layout = ({ location, children }) => {
     <React.Fragment>
       <GlobalStyle location={location} theme={theme} background={background} />
 
-      <Navbar>Start here</Navbar>
+      <Navbar>Start</Navbar>
 
       <Wrapper>
         <Header>

@@ -1,10 +1,10 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
 import { useContext } from "../components/store/storeHelpers"
+import { SansSerifStack } from "../components/layout"
 
 const Container = styled.section`
   padding: 0;
@@ -33,9 +33,9 @@ const Header = styled.section`
 `
 
 const Heading = styled.h1`
+  ${SansSerifStack};
   padding: 0;
   margin: 0;
-  font-family: Graphik;
 `
 
 const Date = styled.small`
