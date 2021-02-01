@@ -2,8 +2,9 @@ import React from "react"
 import Navigation from "./navigation"
 import styled, { css } from "styled-components"
 import { createGlobalStyle } from "styled-components"
-import Graphik from "../fonts/Graphik-Regular.otf"
 import { useContext } from "./store/storeHelpers"
+import sky from "../../content/assets/sky.webp"
+import Graphik from "../fonts/Graphik-Regular.otf"
 
 export const SansSerifStack = css`
   font-family: "Graphik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -28,9 +29,16 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'IBM Plex Mono', 'Lab Mono';
     background-repeat: repeat;
-    background-size: 350px;
+    background-color: ${props =>
+      props.location.pathname == "/" ? "#b4ceea" : "white"};
+    background-size: ${props =>
+      props.location.pathname == "/" ? "cover" : "350px"};
     background-image: url(${props =>
-      props.background ? `${props.background}` : ""});
+      props.location.pathname == "/"
+        ? `${sky}`
+        : props.background
+        ? `${props.background}`
+        : ""});
   }
 `
 
@@ -46,6 +54,7 @@ const Wrapper = styled.section`
   padding: 8em 6em;
   display: grid;
   grid-template-columns: 15% 75%;
+  max-width: 2500px;
 
   mobile {
     flex-wrap: wrap;
