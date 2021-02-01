@@ -6,9 +6,20 @@ import styled from "styled-components"
 import { useContext } from "../components/store/storeHelpers"
 import { SansSerifStack } from "../components/layout"
 
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 10% 75%;
+  align-items: center;
+`
+
 const Container = styled.section`
+  ${SansSerifStack}
   padding: 0;
   margin: 0;
+`
+
+const Description = styled(Container)`
+  margin-bottom: 4em;
 `
 
 const List = styled.ul`
@@ -24,12 +35,6 @@ const ListItem = styled.li`
 
 const ListItemLink = styled(Link)`
   text-decoration: none;
-`
-
-const Header = styled.section`
-  display: grid;
-  grid-template-columns: 10% 75%;
-  align-items: center;
 `
 
 const Heading = styled.h1`
@@ -51,7 +56,10 @@ const Photos = ({ data, location }) => {
     return (
       <Layout location={location} title={siteTitle}>
         <SEO title="All posts" />
-        <Container>No blog posts to display</Container>
+        <Grid>
+          <Container></Container>
+          <Container>No blog posts to display</Container>
+        </Grid>
       </Layout>
     )
   }
@@ -59,6 +67,16 @@ const Photos = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
+
+      <Grid>
+        <Container></Container>
+
+        <Description>
+          Sometimes I take photos.. This is a photo diary of film pictures taken
+          on some of my various analogue cameras.
+        </Description>
+      </Grid>
+
       <List>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
@@ -66,22 +84,24 @@ const Photos = ({ data, location }) => {
 
           return (
             <ListItem key={post.fields.slug}>
-              <Header>
+              <Grid>
                 <Date>{post.frontmatter.date}</Date>
-                <Heading>
-                  <ListItemLink
-                    to={post.fields.slug}
-                    itemProp="url"
-                    onMouseLeave={() => updateTheme()}
-                    onClick={() => updateTheme()}
-                    onMouseEnter={() =>
-                      updateTheme(thumbnail.publicURL, "white")
-                    }
-                  >
-                    {title}
-                  </ListItemLink>
-                </Heading>
-              </Header>
+                <Container>
+                  <Heading>
+                    <ListItemLink
+                      to={post.fields.slug}
+                      itemProp="url"
+                      onMouseLeave={() => updateTheme()}
+                      onClick={() => updateTheme()}
+                      onMouseEnter={() =>
+                        updateTheme(thumbnail.publicURL, "white")
+                      }
+                    >
+                      {title}
+                    </ListItemLink>
+                  </Heading>
+                </Container>
+              </Grid>
             </ListItem>
           )
         })}
