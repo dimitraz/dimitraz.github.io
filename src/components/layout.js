@@ -1,10 +1,10 @@
 import React from "react"
 import Navigation from "./navigation"
 import styled, { css } from "styled-components"
-import { createGlobalStyle } from "styled-components"
-import { useContext } from "./store/storeHelpers"
 import sky from "../../content/assets/sky.webp"
 import Graphik from "../fonts/Graphik-Regular.otf"
+import { createGlobalStyle } from "styled-components"
+import { useThemeContext } from "../context/helpers"
 
 export const SansSerifStack = css`
   font-family: "Graphik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -23,18 +23,18 @@ const GlobalStyle = createGlobalStyle`
     }
 
   body, h1, a, a:active, a:visited {
-    color: ${props => (props.theme ? "#eee" : "#222")};
+    color: ${props => (props.theme === "white" ? "#eee" : "#222")};
   }
 
   body {
     font-family: 'IBM Plex Mono', 'Lab Mono';
     background-repeat: repeat;
     background-color: ${props =>
-      props.location.pathname == "/" ? "#b4ceea" : "white"};
+      props.location.pathname === "/" ? "#b4ceea" : "white"};
     background-size: ${props =>
-      props.location.pathname == "/" ? "cover" : "350px"};
+      props.location.pathname === "/" ? "cover" : "350px"};
     background-image: url(${props =>
-      props.location.pathname == "/"
+      props.location.pathname === "/"
         ? `${sky}`
         : props.background
         ? `${props.background}`
@@ -66,7 +66,7 @@ const Header = styled.header``
 const Container = styled.section``
 
 const Layout = ({ location, children }) => {
-  const { background, theme } = useContext()
+  const { theme, background } = useThemeContext()
 
   return (
     <React.Fragment>

@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
-import { useContext } from "../components/store/storeHelpers"
+import { useThemeContext } from "../context/helpers"
 import { SansSerifStack } from "../components/layout"
 
 const Grid = styled.div`
@@ -50,7 +50,7 @@ const Date = styled.small`
 const Photos = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
-  const { updateTheme } = useContext()
+  const { updateTheme } = useThemeContext()
 
   if (posts.length === 0) {
     return (

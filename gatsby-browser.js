@@ -10,8 +10,8 @@ import "./src/normalize.css"
 import "prismjs/themes/prism.css"
 
 import React from "react"
-import { StoreProvider } from "./src/components/store/store"
+import ThemeProvider from "./src/context/theme"
 
 export const wrapRootElement = ({ element }) => (
-  <StoreProvider>{element}</StoreProvider>
+  <ThemeProvider>{element}</ThemeProvider>
 )
