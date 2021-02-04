@@ -20,6 +20,7 @@ const Container = styled.section`
 
 const Description = styled(Container)`
   margin-bottom: 4em;
+  line-height: 1.5;
 `
 
 const List = styled.ul`
@@ -29,7 +30,7 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  padding: 0 0 4em 0;
+  padding: 0 0 3em 0;
   margin: 0;
 `
 

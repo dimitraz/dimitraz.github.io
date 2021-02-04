@@ -37,6 +37,10 @@ const Date = styled.small`
   font-family: monospace;
 `
 
+const NavLink = styled(Link)`
+  text-decoration: none;
+`
+
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -59,14 +63,14 @@ const BlogPostTemplate = ({ data, location }) => {
 
         <Navigation>
           {previous && (
-            <Link to={previous.fields.slug} rel="prev">
-              ← {previous.frontmatter.title}
-            </Link>
+            <NavLink to={previous.fields.slug} rel="prev">
+              ← {previous.frontmatter.title} &nbsp;
+            </NavLink>
           )}
           {next && (
-            <Link to={next.fields.slug} rel="next">
+            <NavLink to={next.fields.slug} rel="next">
               {next.frontmatter.title} →
-            </Link>
+            </NavLink>
           )}
         </Navigation>
       </Container>

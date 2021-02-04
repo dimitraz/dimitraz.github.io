@@ -59,7 +59,6 @@ const Navigation = ({ location }) => {
     }
   `)
   const icon = data?.folderIcon?.childImageSharp?.fixed
-  const catIcon = data?.catIcon?.childImageSharp?.fixed
 
   return (
     <Nav>
@@ -69,7 +68,7 @@ const Navigation = ({ location }) => {
       <NavItem to="/blog" location={location} icon={icon}>
         Blog
       </NavItem>
-      <NavItem to="/photos" location={location} icon={catIcon}>
+      <NavItem to="/photos" location={location} icon={icon}>
         Photos
       </NavItem>
     </Nav>

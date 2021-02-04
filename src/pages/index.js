@@ -33,6 +33,7 @@ const WindowContent = styled.div`
 const Heading = styled.h1`
   color: white;
   text-align: center;
+  font-weight: normal;
 `
 
 const Message = styled.div`

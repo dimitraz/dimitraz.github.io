@@ -18,7 +18,7 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  padding: 0 0 4em 0;
+  padding: 0 0 3em 0;
   margin: 0;
 `
 
