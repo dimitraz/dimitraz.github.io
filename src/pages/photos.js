@@ -81,7 +81,7 @@ const Photos = ({ data, location }) => {
       <List>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
-          const thumbnail = post.frontmatter.thumbnail
+          const thumbnail = post.frontmatter.thumbnail.childImageSharp.fixed.src
 
           return (
             <ListItem key={post.fields.slug}>
@@ -94,9 +94,7 @@ const Photos = ({ data, location }) => {
                       itemProp="url"
                       onMouseLeave={() => updateTheme()}
                       onClick={() => updateTheme()}
-                      onMouseEnter={() =>
-                        updateTheme(thumbnail.publicURL, "white")
-                      }
+                      onMouseEnter={() => updateTheme(thumbnail, "white")}
                     >
                       {title}
                     </ListItemLink>
@@ -134,7 +132,11 @@ export const pageQuery = graphql`
           title
           description
           thumbnail {
-            publicURL
+            childImageSharp {
+              fixed(width: 300) {
+                ...GatsbyImageSharpFixed
+              }
+            }
           }
         }
       }
