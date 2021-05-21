@@ -133,7 +133,7 @@ export const pageQuery = graphql`
           description
           thumbnail {
             childImageSharp {
-              fixed(width: 300) {
+              fixed(width: 600) {
                 ...GatsbyImageSharpFixed
               }
             }

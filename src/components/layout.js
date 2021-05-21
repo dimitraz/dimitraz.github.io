@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Navigation from "./navigation"
 import styled, { css } from "styled-components"
 import sky from "../../content/assets/sky.webp"
@@ -62,23 +62,60 @@ const Wrapper = styled.section`
   }
 `
 
-const Header = styled.header``
+const Header = styled.header`
+  display: grid;
+  position: fixed;
+  padding: 8em 0 8em 6em;
+`
+
 const Container = styled.section``
+
+const Dropdown = styled.ul`
+  background: black;
+  width: 15%;
+  color: white;
+  margin: 0;
+  padding: 1em 0 0 0;
+  position: fixed;
+  z-index: 10;
+`
+const DropdownItem = styled.li`
+  padding: 0 0 1em 1.5em;
+  list-style: none;
+`
 
 const Layout = ({ location, children }) => {
   const { theme, background } = useThemeContext()
+  const [visible, setVisibility] = useState(false)
 
   return (
     <React.Fragment>
       <GlobalStyle location={location} theme={theme} background={background} />
 
-      <Navbar>Start</Navbar>
+      <Navbar
+        onMouseEnter={() => setVisibility(true)}
+        onMouseLeave={() => setVisibility(false)}
+      >
+        Start
+      </Navbar>
+
+      {visible ? (
+        <Dropdown
+          onMouseEnter={() => setVisibility(true)}
+          onMouseLeave={() => setVisibility(false)}
+        >
+          <DropdownItem>
+            <a href="https://github.com/dimitraz">Github</a>
+          </DropdownItem>
+        </Dropdown>
+      ) : null}
+
+      <Header>
+        <Navigation location={location} />
+      </Header>
 
       <Wrapper>
-        <Header>
-          <Navigation location={location} />
-        </Header>
-
+        <Container></Container>
         <Container>{children}</Container>
       </Wrapper>
     </React.Fragment>

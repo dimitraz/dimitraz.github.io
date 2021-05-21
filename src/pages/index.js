@@ -10,7 +10,7 @@ const Window = styled.div`
   position: relative;
   max-width: 550px;
   left: -5em;
-  top: -2em;
+  top: -4em;
   margin: auto;
   background: black;
   color: white;
@@ -52,7 +52,7 @@ const GlassWindow = styled.div`
   margin: auto;
   margin-bottom: 1em;
   width: 600px;
-  height: 286px;
+  height: 317px;
   background-image: url(${glass});
   background-size: 600px;
   cursor: move;
