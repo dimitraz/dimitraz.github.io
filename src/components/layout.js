@@ -82,6 +82,11 @@ const Dropdown = styled.ul`
 const DropdownItem = styled.li`
   padding: 0 0 1em 1.5em;
   list-style: none;
+
+  a {
+    color: #eee;
+    text-decoration: none;
+  }
 `
 
 const Layout = ({ location, children }) => {
