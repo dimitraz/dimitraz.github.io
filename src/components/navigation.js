@@ -65,7 +65,7 @@ const Navigation = ({ location }) => {
       <NavItem to="/" location={location} icon={icon}>
         Home
       </NavItem>
-      <NavItem to="/blog" location={location} icon={icon}>
+      <NavItem to="/posts" location={location} icon={icon}>
         Blog
       </NavItem>
       <NavItem to="/photos" location={location} icon={icon}>
