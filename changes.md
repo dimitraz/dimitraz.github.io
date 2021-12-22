@@ -5,7 +5,7 @@ One day when I make time for this :thinking:
 - [ ] Navbar links are bad
 - [ ] Fix image quality on larger screens
 - [ ] Lightbox
-- [ ] Lazy load home page images?
+- [x] Lazy load home page images?
 - [ ] Disable vertical scroll on home page
 - [ ] Disqus
 - [ ] Post categories
