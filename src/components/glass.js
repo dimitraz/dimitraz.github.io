@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import Draggable from "react-draggable"
+import { ObjectContext } from "../context/objects"
 
 const GlassWindow = styled.div`
   position: relative;
+  z-index: ${props => (props.zIndex ? props.zIndex : 0)};
   margin: auto;
   margin-bottom: 1em;
   height: 317px;
@@ -27,10 +29,17 @@ const Glass = () => {
     }
   `)
   const stainedGlass = data?.stainedGlass?.childImageSharp?.fixed.src
+  const { state, dispatch } = useContext(ObjectContext)
+
+  // dispatch a new message which will calculate
+  // the new z-index value for this component
+  const moveToFront = () => {
+    dispatch({ type: "glass" })
+  }
 
   return (
-    <Draggable>
-      <GlassWindow bg={stainedGlass} />
+    <Draggable onDrag={moveToFront}>
+      <GlassWindow bg={stainedGlass} zIndex={state.glass} />
     </Draggable>
   )
 }

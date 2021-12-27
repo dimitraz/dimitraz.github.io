@@ -44,6 +44,7 @@ const Folder = ({ isActive, text, path }) => {
     }
   `)
   const folder = data?.folder?.childImageSharp?.fixed.src
+
   return (
     <Draggable>
       <Item onDoubleClick={e => navigate(path)}>

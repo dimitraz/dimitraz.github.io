@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import Draggable from "react-draggable"
+import { ObjectContext } from "../context/objects"
 
 const Bubble = styled.div`
   position: relative;
+  z-index: ${props => (props.zIndex ? props.zIndex : 0)};
   width: 500px;
   height: 53px;
   left: 30em;
@@ -27,10 +29,17 @@ const Message = () => {
     }
   `)
   const bubble = data?.bubble?.childImageSharp?.fixed.src
+  const { state, dispatch } = useContext(ObjectContext)
+
+  // dispatch a new message which will calculate
+  // the new z-index value for this component
+  const moveToFront = () => {
+    dispatch({ type: "message" })
+  }
 
   return (
-    <Draggable>
-      <Bubble bg={bubble} />
+    <Draggable onDrag={moveToFront}>
+      <Bubble bg={bubble} zIndex={state.message} />
     </Draggable>
   )
 }

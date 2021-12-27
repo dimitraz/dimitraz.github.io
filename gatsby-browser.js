@@ -11,7 +11,10 @@ import "prismjs/themes/prism.css"
 
 import React from "react"
 import ThemeProvider from "./src/context/theme"
+import ObjectProvider from "./src/context/objects"
 
 export const wrapRootElement = ({ element }) => (
-  <ThemeProvider>{element}</ThemeProvider>
+  <ObjectProvider>
+    <ThemeProvider>{element}</ThemeProvider>
+  </ObjectProvider>
 )

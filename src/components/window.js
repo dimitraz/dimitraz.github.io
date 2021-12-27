@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import Draggable from "react-draggable"
+import { ObjectContext } from "../context/objects"
 
 const Heading = styled.h1`
   color: white;
@@ -8,9 +9,13 @@ const Heading = styled.h1`
   font-weight: normal;
 `
 
-const WindowPane = styled.div`
+const WindowContainer = styled.div`
   position: relative;
+  z-index: ${props => (props.zIndex ? props.zIndex : 0)};
   width: 550px;
+`
+
+const WindowPane = styled.div`
   background: black;
   color: white;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
@@ -30,16 +35,24 @@ const WindowContent = styled.div`
 `
 
 const Window = () => {
+  const { state, dispatch } = useContext(ObjectContext)
+
+  // dispatch a new message which will calculate
+  // the new z-index value for this component
+  const moveToFront = () => {
+    dispatch({ type: "window" })
+  }
+
   return (
-    <Draggable>
-      <div>
+    <Draggable onDrag={moveToFront}>
+      <WindowContainer zIndex={state.window}>
         <WindowPane>
           <WindowBar>x</WindowBar>
           <WindowContent>
             <Heading>Hey there, it's nice to see you here!</Heading>
           </WindowContent>
         </WindowPane>
-      </div>
+      </WindowContainer>
     </Draggable>
   )
 }
