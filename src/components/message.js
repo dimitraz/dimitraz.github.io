@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
+import Draggable from "react-draggable"
 
 const Bubble = styled.div`
   position: relative;
@@ -26,7 +27,12 @@ const Message = () => {
     }
   `)
   const bubble = data?.bubble?.childImageSharp?.fixed.src
-  return <Bubble bg={bubble} />
+
+  return (
+    <Draggable>
+      <Bubble bg={bubble} />
+    </Draggable>
+  )
 }
 
 export default Message

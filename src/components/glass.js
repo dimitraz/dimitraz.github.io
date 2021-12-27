@@ -1,13 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
+import Draggable from "react-draggable"
 
 const GlassWindow = styled.div`
   position: relative;
   margin: auto;
   margin-bottom: 1em;
-  width: 600px;
   height: 317px;
+  width: 600px;
   background-image: url(${props => (props.bg ? props.bg : "")});
   background-size: 600px;
   cursor: move;
@@ -26,7 +27,12 @@ const Glass = () => {
     }
   `)
   const stainedGlass = data?.stainedGlass?.childImageSharp?.fixed.src
-  return <GlassWindow bg={stainedGlass} />
+
+  return (
+    <Draggable>
+      <GlassWindow bg={stainedGlass} />
+    </Draggable>
+  )
 }
 
 export default Glass

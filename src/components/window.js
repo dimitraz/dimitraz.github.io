@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import Draggable from "react-draggable"
 
 const Heading = styled.h1`
   color: white;
@@ -9,10 +10,7 @@ const Heading = styled.h1`
 
 const WindowPane = styled.div`
   position: relative;
-  max-width: 550px;
-  left: -5em;
-  top: -4em;
-  margin: auto;
+  width: 550px;
   background: black;
   color: white;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
@@ -33,12 +31,16 @@ const WindowContent = styled.div`
 
 const Window = () => {
   return (
-    <WindowPane>
-      <WindowBar>x</WindowBar>
-      <WindowContent>
-        <Heading>Hey there, it's nice to see you here!</Heading>
-      </WindowContent>
-    </WindowPane>
+    <Draggable>
+      <div>
+        <WindowPane>
+          <WindowBar>x</WindowBar>
+          <WindowContent>
+            <Heading>Hey there, it's nice to see you here!</Heading>
+          </WindowContent>
+        </WindowPane>
+      </div>
+    </Draggable>
   )
 }
 
