@@ -9,7 +9,14 @@ const Nav = styled.div`
 
 const NavItem = props => {
   const isActive = props.location.pathname === props.path
-  return <Folder text={props.text} isActive={isActive} path={props.path} />
+  return (
+    <Folder
+      text={props.text}
+      iconType="folder2"
+      isActive={isActive}
+      path={props.path}
+    />
+  )
 }
 
 const Navigation = ({ location }) => {

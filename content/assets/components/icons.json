@@ -1,0 +1,42 @@
+[
+  {
+    "url": "./calendar.png",
+    "height": "48px",
+    "width": "48px"
+  },
+  {
+    "url": "./eicon.png",
+    "height": "48px",
+    "width": "48px"
+  },
+  {
+    "url": "./epage.png",
+    "height": "48px",
+    "width": "48px"
+  },
+  {
+    "url": "./music.png",
+    "height": "48px",
+    "width": "48px"
+  },
+  {
+    "url": "./radio1.png",
+    "width": "34px",
+    "height": "121px"
+  },
+  {
+    "url": "./radio2.png",
+    "width": "34px",
+    "height": "121px"
+  },
+  {
+    "url": "./radio3.png",
+    "width": "34px",
+    "height": "121px"
+  },
+  {
+    "url": "./url1.png",
+    "width": "193px",
+    "height": "21px"
+  }
+]
