@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Navigation from "./navigation"
 import styled, { css } from "styled-components"
-import sky from "../../content/assets/sky.webp"
+import botticelli from "../../content/assets/botticelli.jpg"
 import Graphik from "../fonts/Graphik-Regular.otf"
 import { createGlobalStyle } from "styled-components"
 import { useThemeContext } from "../context/helpers"
@@ -29,13 +29,14 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'IBM Plex Mono', 'Lab Mono';
     background-repeat: repeat;
+    background-position: center;
     background-color: ${props =>
       props.location.pathname === "/" ? "#b4ceea" : "white"};
     background-size: ${props =>
       props.location.pathname === "/" ? "cover" : "350px"};
     background-image: url(${props =>
       props.location.pathname === "/"
-        ? `${sky}`
+        ? `${botticelli}`
         : props.background
         ? `${props.background}`
         : ""});
@@ -115,14 +116,20 @@ const Layout = ({ location, children }) => {
         </Dropdown>
       ) : null}
 
-      <Header>
-        <Navigation location={location} />
-      </Header>
-
-      <Wrapper>
-        <Container></Container>
+      {location.pathname == "/" ? (
         <Container>{children}</Container>
-      </Wrapper>
+      ) : (
+        <div>
+          {" "}
+          <Header>
+            <Navigation location={location} />
+          </Header>
+          <Wrapper>
+            <Container></Container>
+            <Container>{children}</Container>
+          </Wrapper>
+        </div>
+      )}
     </React.Fragment>
   )
 }
